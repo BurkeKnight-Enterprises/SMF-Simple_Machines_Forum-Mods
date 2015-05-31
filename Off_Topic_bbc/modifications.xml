@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>BurkeKnight:Off_Topic_BBC</id>
+	<version>1.0</version>
+
+	<file name="$sourcedir/Subs.php">
+		<operation>
+			<search position="before"><![CDATA[
+			array(
+				'tag' => 'nobbc',
+				'type' => 'unparsed_content',
+				'content' => '$1',
+			),]]></search>
+
+			<add><![CDATA[
+			array(
+				'tag' => 'ot',
+				'before' => '<div class="quoteheader">' . $txt['bbc_off_topic_icon'] . '</div><div class="information">',
+				'after' => '</div>',
+				'block_level' => true,
+			),
+			array(
+				'tag' => 'ot',
+				'type' => 'parsed_equals',
+				'before' => '<div class="quoteheader">' . $txt['bbc_off_topic_icon'] . '</div><div class="information">',
+				'after' => '$1</div>',
+				'quoted' => 'optional',
+				'block_level' => true,
+			),]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Subs-Editor.php">
+		<operation>
+			<search position="before"><![CDATA[
+			array(
+				'image' => 'quote',
+				'code' => 'quote',
+				'before' => '[quote]',
+				'after' => '[/quote]',
+				'description' => $txt['bbc_quote']
+			),]]></search>
+
+			<add><![CDATA[
+			array(
+				'image' => 'off_topic',
+				'code' => 'ot',
+				'before' => '[ot]',
+				'after' => '[/ot]',
+				'description' => $txt['bbc_off_topic']
+			),]]></add>
+		</operation>
+	</file>
+
+	<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+// Start Off-Topic BBC
+global $settings;
+$txt['bbc_off_topic'] = 'Off-Topic';
+$txt['bbc_off_topic_icon'] = '<img src="' . $settings['images_url'] . '/offtopic.png" alt="Off-Topic" /> Off-Topic:';
+// End Off-Topic BBC
+
+]]></add>
+		</operation>
+	</file>
+
+	<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+// Start Off-Topic BBC
+global $settings;
+$txt['bbc_off_topic'] = 'Off-Topic';
+$txt['bbc_off_topic_icon'] = '<img src="' . $settings['images_url'] . '/offtopic.png" alt="Off-Topic" /> Off-Topic:';
+// End Off-Topic BBC
+
+]]></add>
+		</operation>
+	</file>
+
+</modification>

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	
+	<id>BurkeKnight:Child_Board_Removal</id>
+	<version>1.0</version>
+
+	<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+
+			<add><![CDATA[
+$txt['child_board_removal_all'] = 'Remove ALL child boards from board index?<br /><span class="smalltext">(Overrides selective removal settings found below)</span>';
+$txt['child_board_removal_some'] = 'Remove only a few child boards? From which parent boards?<br /><span class="smalltext">(Use ID of parent board. Must be separated by comma. i.e. 2,4,6)</span>';
+$txt['child_board_removal_mods'] = 'Remove Child Boards';
+$txt['child_board_removal_title']='Remove Child Boards';
+	]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Admin.php">
+		<operation>
+			<search position="before"><![CDATA[
+						// Mod Authors for a "ADD AFTER" on this line. Ensure you end your change with a comma. For example:]]></search>
+
+			<add><![CDATA[
+						'child_board_removal' => array($txt['child_board_removal_mods']),]]></add>
+		</operation>
+	</file>
+
+    <file name="$sourcedir/ManageSettings.php">
+		<operation>
+			<search position="before"><![CDATA[
+		// Mod authors, once again, if you have a whole section to add do it AFTER this line, and keep a comma at the end.]]></search>
+			
+			<add><![CDATA[
+		'child_board_removal' => 'Modify_Child_Board_Removal_Settings',]]></add>
+		</operation>
+
+		<operation>
+			<search position="end" />
+			
+			<add><![CDATA[
+function Modify_Child_Board_Removal_Settings($return_config = false)
+{
+	global $txt, $scripturl, $context, $settings, $sc;
+
+	$config_vars = array(
+
+		array('check', 'child_board_removal_all'),
+		array('text', 'child_board_removal_some'),
+	);
+
+	$context['post_url'] = $scripturl . '?action=admin;area=modsettings;save;sa=child_board_removal';
+	$context['settings_title'] = $txt['child_board_removal_title'];
+
+	if ($return_config)
+		return $config_vars;
+
+	if (isset($_GET['save']))
+	{
+		checkSession();
+
+		saveDBSettings($config_vars);
+		writeLog();
+
+		redirectexit('action=admin;area=modsettings;sa=child_board_removal');
+	}
+
+	prepareDBSettingContext($config_vars);
+}
+	]]></add>
+		</operation>
+	</file>
+    
+	<file name="$themedir/BoardIndex.template.php">
+		<operation>
+			<search position="before"><![CDATA[foreach ($category['boards'] as $board)
+			{]]></search>
+			    
+			<add><![CDATA[
+				global $modSettings, $context;
+				
+				if (!isset($context['cbr']))
+				$context['cbr'] = empty($modSettings['child_board_removal_some']) ? array() : explode(",", $modSettings['child_board_removal_some']);
+
+				if (!empty($modSettings['child_board_removal_all']) || in_array($board['id'], $context['cbr']))
+				$board['children'] = array();
+	]]></add>
+		</operation>
+	</file>
+    
+	<file name="$themedir/MessageIndex.template.php">
+		<operation>
+			<search position="before"><![CDATA[foreach ($context['boards'] as $board)
+		{]]></search>
+			
+			<add><![CDATA[
+				global $modSettings, $context;
+				
+				if (!isset($context['cbr']))
+				$context['cbr'] = empty($modSettings['child_board_removal_some']) ? array() : explode(",", $modSettings['child_board_removal_some']);
+
+				if (!empty($modSettings['child_board_removal_all']) || in_array($board['id'], $context['cbr']))
+				$board['children'] = array();
+	]]></add>
+		</operation>
+	</file>
+
+</modification>

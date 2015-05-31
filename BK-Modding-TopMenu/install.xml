@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!--Generated with Mod Manager (c) 2013 Yoshi2889-->
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BK-Modding:TopMenu</id>
+    <version>1.0</version>
+    <file name="$themedir/css/index.css">
+        <operation>
+            <search position="replace"><![CDATA[/* Styles for the standard dropdown menus.
+------------------------------------------------------- */
+#main_menu
+{
+	padding: 0 0.5em;
+	float: left;
+	margin: 0;
+	width: 98%;
+}
+
+.dropmenu, .dropmenu ul
+{
+	list-style: none;
+	line-height: 1em;
+	padding: 0;
+	margin: 0;
+}
+.dropmenu
+{
+	padding: 0 0.5em;
+}
+.dropmenu a
+{
+	display: block;
+	color: #000;
+	text-decoration: none;
+}
+.dropmenu a span
+{
+	display: block;
+	padding: 0 0 0 5px;
+	font-size: 0.9em;
+}
+/* the background's first level only */
+.dropmenu li a.firstlevel
+{
+	margin-right: 8px;
+}
+.dropmenu li a.firstlevel span.firstlevel
+{
+	display: block;
+	position: relative;
+	left: -5px;
+	padding-left: 5px;
+	height: 22px;
+	line-height: 19px;
+	white-space: pre;
+}
+.dropmenu li
+{
+	float: left;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+.dropmenu li ul
+{
+	z-index: 90;
+	display: none;
+	position: absolute;
+	width: 19.2em;
+	font-weight: normal;
+	border-bottom: 1px solid #999;
+	background: url(../images/theme/menu_gfx.png) 0 -130px no-repeat;
+	padding: 7px 0 0 0;
+}
+.dropmenu li li
+{
+	width: 19em;
+	margin: 0;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+}
+.dropmenu li li a span
+{
+	display: block;
+	padding: 8px;
+}
+.dropmenu li ul ul
+{
+	margin: -1.8em 0 0 13em;
+}
+
+/* the active button */
+.dropmenu li a.active
+{
+	background: url(../images/theme/menu_gfx.png) no-repeat 100% 0;
+	color: #fff;
+	font-weight: bold;
+}
+.dropmenu li a.active span.firstlevel
+{
+	background: url(../images/theme/menu_gfx.png) no-repeat 0 0;
+}
+/* the hover effects */
+.dropmenu li a.firstlevel:hover, .dropmenu li:hover a.firstlevel
+{
+	background: url(../images/theme/menu_gfx.png) no-repeat 100% -30px;
+	color: #fff;
+	cursor: pointer;
+	text-decoration: none;
+}
+.dropmenu li a.firstlevel:hover span.firstlevel, .dropmenu li:hover a.firstlevel span.firstlevel
+{
+	background: url(../images/theme/menu_gfx.png) no-repeat 0 -30px;
+}
+/* the hover effects on level2 and 3 */
+.dropmenu li li a:hover, .dropmenu li li:hover>a
+{
+	background: #d4dbe4;
+	color: #000;
+	text-decoration: none;
+}
+.dropmenu li:hover ul ul, .dropmenu li:hover ul ul ul
+{
+	top: -999em;
+}
+.dropmenu li li:hover ul
+{
+	top: auto;
+}
+.dropmenu li:hover ul
+{
+	display: block;
+}
+.dropmenu li li.additional_items
+{
+	background-color: #fff;
+}
+
+/* The dropdown menu toggle image */
+#menu_toggle
+{
+	float: right;
+	margin-right: 10px;
+	padding-top: 3px;
+}
+#menu_toggle span
+{
+	position: relative;
+	right: 5000px;
+}]]></search>
+            <add><![CDATA[/* Styles for the standard dropdown menus.
+------------------------------------------------------- */
+#main_menu
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	float: left;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 20;
+	background: #e3e9ef;
+	border: 1px solid #ccc;
+	box-shadow: 1px 2px 2px 1px #666;
+}
+
+.dropmenu, .dropmenu ul
+{
+	list-style: none;
+	line-height: 2em;
+	padding: 0;
+	margin: 0;
+}
+.dropmenu
+{
+	padding: 0 5%;
+	margin: 0;
+}
+.dropmenu a
+{
+	display: block;
+	color: #222;
+	text-decoration: none;
+	padding: 0;
+}
+.dropmenu a span
+{
+	display: block;
+	padding: 0 5px;
+	font-size: 0.9em;
+	line-height: 1.85em;
+	margin-top: 0.35em;
+	border-radius: 5px;
+}
+/* the background's first level only */
+.dropmenu li a.firstlevel span.firstlevel
+{
+	display: block;
+	position: relative;
+	white-space: pre;
+}
+.dropmenu li
+{
+	float: left;
+	padding:0;
+	margin: 0 2px;
+	position: relative;
+	height: 2.3em;
+	line-height: 2.4em;
+}
+.dropmenu li ul
+{
+	z-index: 90;
+	display: none;
+	position: absolute;
+	left: -6px;
+	width: 16em;
+	font-weight: normal;
+	background: #fff url(../images/theme/menu_gfx.png) -30px -137px repeat-x;
+	border: solid 1px #999;
+	border-radius: 5px;
+	box-shadow: 1px 2px 2px 1px #777;
+	padding: 4px 0;
+}
+.dropmenu li li
+{
+	width: 16em;
+	margin: 0;
+	left: 0;
+}
+#admin_menu .dropmenu li ul
+{
+	width: 19em;
+}
+#admin_menu .dropmenu li li
+{
+	width: 19em;
+}
+.dropmenu li li a
+{
+	border-radius: 3px;
+	width: 15.2em;
+	margin: 0 0.4em;
+}
+#admin_menu .dropmenu li li a
+{
+	width: 18.2em;
+	margin: 0 0.4em;
+}
+.dropmenu li li a span
+{
+	display: block;
+	line-height: 2.2em;
+}
+.dropmenu li li a span img
+{
+	vertical-align: middle;
+}
+.dropmenu li ul ul
+{
+	margin: -2.7em 0 0 15em;
+	padding: 6px 0 4px 0;
+}
+#admin_menu .dropmenu li ul ul
+{
+	margin: -2.7em 0 0 18em;
+}
+#left_admsection #admin_menu
+{
+     display:none;
+}
+/* the active button */
+.dropmenu li a.active span.firstlevel
+{
+	color: #fff;
+	font-weight: bold;
+	background: #5a6c85;
+}
+/* the hover effects */
+.dropmenu li a.firstlevel:hover, .dropmenu li:hover a.firstlevel
+{
+	color: #000;
+	cursor: pointer;
+	text-decoration: none;
+}
+.dropmenu li a.firstlevel:hover span.firstlevel, .dropmenu li:hover a.firstlevel span.firstlevel
+{
+	background: #fd9604;
+}
+.dropmenu li a.active:hover, .dropmenu li:hover a.active
+{
+	color: #fff;
+}
+/* the hover effects on level 2 and 3 */
+.dropmenu li li a.chosen
+{
+	font-weight: bold;
+	color: #fff;
+	background: #5a6c85;
+	border-radius: 4px;
+}
+.dropmenu li li a.chosen:hover
+{
+	color: #444;
+}
+.dropmenu li li a:hover, .dropmenu li li:hover>a
+{
+	background: #D1DDEF;
+	color: #444;
+	text-decoration: none;
+}
+.dropmenu li:hover ul ul, .dropmenu li:hover ul ul ul
+{
+	top: -999em;
+}
+.dropmenu li li:hover ul
+{
+	top: auto;
+}
+.dropmenu li:hover ul
+{
+	display: block;
+	top: 2.3em;
+}
+.dropmenu li li.additional_items
+{
+	background: #fff;
+}
+
+/* The dropdown menu toggle image */
+#menu_toggle
+{
+	float: left;
+	position: fixed;
+	z-index: 16;
+	top: 3.4em;
+	left: 1.8%;
+}
+#menu_toggle span
+{
+	position: relative;
+	right: 5000px;
+}]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[#admin_menu
+{
+	min-height: 2em;
+	padding-left: 0;
+}
+#admin_content
+{
+	clear: left;
+	padding-top: 0.5em;
+}]]></search>
+            <add><![CDATA[#admin_menu
+{
+	padding: 2.7em 2.4em 0 5%;
+	margin: 0;
+	position: fixed;
+	z-index: 15;
+	float: left;
+	top: 0;
+	left: 0;
+	background: #e3e9ef;
+	border: 1px solid #ccc;
+	border-radius: 0 0 5px 0;
+	box-shadow: 1px 2px 2px 1px #666;
+}
+#admin_menu .dropmenu
+{
+	clear: left;
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+#admin_menu .dropmenu li
+{
+	position: relative;
+	float: left;
+}
+#admin_menu .dropmenu li li
+{
+	position: relative;
+	left: 0;
+}
+#adm_submenus
+{
+	padding: 0.5em 1em;
+	margin-bottom: -1.4em;
+	overflow: hidden;
+}
+#adm_submenus .dropmenu
+{
+	padding: 0;
+}
+#admin_content p.description{margin-bottom: 0;}]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[/* the upper_section, float the two each way */
+#upper_section
+{
+	padding: 5px;
+	margin-bottom: 1.5em;
+}
+#upper_section ul li.greeting
+{
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 1.5em;
+}
+#upper_section div.news
+{
+	width: 50%;
+	float: right;
+	text-align: right;
+}]]></search>
+            <add><![CDATA[/* the upper_section, float the two each way */
+#upper_section
+{
+	padding: 5px;
+	margin-bottom: -4.6em;
+}
+#upper_section ul li.greeting
+{
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 1.5em;
+}
+#upper_section div.news
+{
+	width: 287px;
+	float: right;
+}
+/* Additional class. */
+#upper_section div.news h2
+{
+	clear: both;
+}
+/* Additional classes for the search form. */
+#search_form
+{
+	float: right;
+	padding: 0;
+	height: 1.4em;
+	line-height: 1.4em;
+	position: fixed;
+	z-index: 32;
+	top: 0.5em;
+	right: 5.5%;
+}
+#search_form input.input_text 
+{
+	width: 160px;
+	border: 1px solid #888;
+	border-radius: 3px;
+	background: #fff;
+	position: relative;
+	top: 0;
+}
+#search_form input.input_text:focus
+{
+	box-shadow: 1px 1px 1px 1px #aaa;
+}
+#search_form input.button_submit
+{
+	border: 1px solid #888;
+	border-radius: 3px;
+	position: relative;
+	padding: 1px 4px;
+	top: 0;
+	float:right;
+}
+/* End additional classes. */]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[body
+{
+	background: #E9EEF2 url(../images/theme/backdrop.png) repeat-x;
+	font: 78%/130% "Verdana", "Arial", "Helvetica", sans-serif;
+	margin: 0 auto;
+	padding: 15px 0;
+}]]></search>
+            <add><![CDATA[body
+{
+	background: #E9EEF2 url(../images/theme/backdrop.png) repeat-x;
+	font: 78%/130% "Verdana", "Arial", "Helvetica", sans-serif;
+	margin: 0 auto;
+	padding: 70px 0;
+}]]></add>
+        </operation>
+    </file>
+
+</modification>

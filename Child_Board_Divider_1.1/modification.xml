@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	
+	<id>BurkeKnight:Child_Board_Divider</id>
+	<version>1.1</version>
+
+    <file name="$themedir/css/index.css">
+		<operation>
+			<search position="replace"><![CDATA[.table_frame .table_list td.icon, .table_frame .table_list td.info, .table_frame .table_list td.stats
+{
+	border-right: 2px solid white;
+}]]></search>
+			
+			<add><![CDATA[.table_frame .table_list td.icon, .table_frame .table_list td.info, .table_frame .table_list td.stats
+{
+    border: 2px solid white;
+}]]></add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[table.table_list tbody.content td.lastpost
+{
+	line-height: 1.3em;
+	font-size: 85%;
+	width: 24%;
+}]]></search>
+			
+			<add><![CDATA[.cb_div
+{
+	line-height: 1.3em;
+	font-size: 85%;
+	width: 24%;
+	border: 2px solid white;
+}]]></add>
+		</operation>
+	</file>
+    
+    <file name="$themedir/MessageIndex.template.php">
+		<operation>
+			<search position="replace"><![CDATA[<td class="lastpost">';
+
+			/* The board's and children's 'last_post's have:]]></search>
+			
+			<add><![CDATA[<td class="cb_div">';
+
+			/* The board's and children's 'last_post's have:]]></add>
+		</operation>
+	</file>
+</modification>

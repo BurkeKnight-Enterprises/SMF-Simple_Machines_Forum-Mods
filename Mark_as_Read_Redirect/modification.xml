@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	
+	<id>BurkeKnight:Mark_Read_Redirect</id>
+	<version>1.0</version>
+
+	<file name="$sourcedir/Subs-Boards.php">
+		<operation>
+			<search position="replace"><![CDATA[if (empty($board))
+				redirectexit();
+			else
+				redirectexit('board=' . $board . '.0');
+		}
+		else
+		{
+			if (empty($board_info['parent']))
+				redirectexit();
+			else
+				redirectexit('board=' . $board_info['parent'] . '.0');]]></search>
+
+			<add><![CDATA[if (empty($board))
+				redirectexit();
+			else
+				redirectexit();
+		}
+		else
+		{
+			if (empty($board_info['parent']))
+				redirectexit();
+			else
+				redirectexit();]]></add>
+		</operation>
+	</file>
+
+</modification>

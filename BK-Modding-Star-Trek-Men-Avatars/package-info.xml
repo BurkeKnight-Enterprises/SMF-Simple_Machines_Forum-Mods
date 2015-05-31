@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/package-info">
+    <id>BKModding:StarTrekMenAvatars</id>
+    <name>BK Modding Men of Star Trek Avatars</name>
+    <version>1.0</version>
+    <type>avatar</type>
+    <install for="2.0-2.0.99">
+        <readme parsebbc="true">readme.txt</readme>
+        <require-dir name="Star_Trek_Men" destination="$avatardir" />
+    </install>
+    <uninstall for="2.0-2.0.99">
+        <remove-dir name="$avatardir/Star_Trek_Men" />
+    </uninstall>
+</package-info>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Package manifest file for Hide PM Text in Email Notifications mod
+
+	ATTENTION: If you are trying to install this manually, you should try
+	the package manager.  If it will not work for you, please take a look
+	at the following for information on this format:
+		http://mods.simplemachines.org/docs/manual-install.php
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<package-info xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/package-info">
+    <id>BurkeKnight:HPMTiEN</id>
+    <name>Hide PM Text in Email Notifications</name>
+    <version>1.0</version>
+    <type>modification</type>
+    <install for="2.0 - 2.0.99">
+        <readme parsebbc="true">readme.txt</readme>
+        <modification>install.xml</modification>
+		<redirect url="?action=admin;area=modsettings" type="inline">Redirecting to Hide PM Text in Email Notifications settings page...</redirect>
+    </install>
+    <uninstall for="2.0 - 2.0.99">
+        <modification reverse="true">install.xml</modification>
+    </uninstall>
+</package-info>

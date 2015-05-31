@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!--Generated with Mod Manager (c) 2013 Yoshi2889-->
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BK-Modding:Sub-Board</id>
+    <version>2.0</version>
+    <file name="$themedir/languages/index.english-utf8.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[$txt['parent_boards'] = 'Child Boards';]]></search>
+            <add><![CDATA[$txt['parent_boards'] = 'Sub-Boards';]]></add>
+        </operation>
+    </file>
+    <file name="$themedir/languages/index.english.php">
+        <operation>
+            <search position="replace"><![CDATA[$txt['parent_boards'] = 'Child Boards';]]></search>
+            <add><![CDATA[$txt['parent_boards'] = 'Sub-Boards';]]></add>
+        </operation>
+    </file>
+    <file name="$themedir/languages/index.portuguese_pt.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[$txt['parent_boards'] = 'Mini Quadros';]]></search>
+            <add><![CDATA[$txt['parent_boards'] = 'Sub-Quadros';]]></add>
+        </operation>
+    </file>
+</modification>

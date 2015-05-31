@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Modification file for BK-SMF Welcome Message Mod
+
+	ATTENTION: If you are trying to install this manually, you should try
+	the package manager.  If it will not work for you, please take a look
+	at the following for information on this format:
+		http://mods.simplemachines.org/docs/manual-install.php
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>BK-SMF:BK-SMF_Welcome_Message_Mod</id>
+
+	<version>1.0</version>
+
+	<file name="$themedir/index.template.php">
+		<operation>
+			<search position="replace"><![CDATA[	// Display user name and time.
+	echo '
+		<ul id="greeting_section" class="titlebg2">
+			<li id="time" class="smalltext floatright">
+				' , $context['current_time'], '
+				<a href="#" onclick="mainHeader.toggle(); return false;"><img id="upshrink" src="', $settings['images_url'], '/', empty($options['collapse_header']) ? 'upshrink.gif' : 'upshrink2.gif', '" alt="*" title="', $txt['upshrink_description'], '" align="bottom" /></a>
+			</li>';
+
+	if ($context['user']['is_logged'])
+		echo '
+			<li id="name">', $txt['hello_member_ndt'], ' <em>', $context['user']['name'], '</em></li>';
+	else
+		echo '
+			<li id="name">', $txt['hello_guest'], ' <em>', $txt['guest'], '</em></li>';
+
+	echo '
+		</ul>]]></search>
+			<add><![CDATA[	// Display user name and time.
+	echo '
+		<ul id="greeting_section" class="titlebg2">
+			<li id="time" class="floatright"><strong>
+				' , $context['current_time'], '
+				</strong><a href="#" onclick="mainHeader.toggle(); return false;"><img id="upshrink" src="', $settings['images_url'], '/', empty($options['collapse_header']) ? 'upshrink.gif' : 'upshrink2.gif', '" alt="*" title="', $txt['upshrink_description'], '" align="bottom" /></a>
+			</li>';
+
+	if ($context['user']['is_logged'])
+		echo '
+			<li id="name"><strong>', $txt['hello_member_ndt'],'<em> ', $context['user']['name'],'</em>, ', $txt['bksmf_welcome_back'],' <em>', $context['forum_name'],'</em>.</strong></li>';
+	else
+		echo '
+			<li id="name"><strong>', $txt['bksmf_hello'],'<em> ', $txt['guest'],'</em>, ', $txt['bksmf_welcome_to'],' <em>', $context['forum_name'],'</em>.</strong></li>';
+
+	echo '
+		</ul>]]></add>
+		</operation>
+	</file>
+	
+		<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+//BK-SMF Welcome Message Mod 
+$txt['bksmf_welcome_back'] = 'Welcome back to';
+$txt['bksmf_hello'] = 'Hello';
+$txt['bksmf_welcome_to'] = 'Welcome to';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+//BK-SMF Welcome Message Mod 
+$txt['bksmf_welcome_back'] = 'Welcome back to';
+$txt['bksmf_hello'] = 'Hello';
+$txt['bksmf_welcome_to'] = 'Welcome to';
+]]></add>
+		</operation>
+	</file>
+
+</modification>

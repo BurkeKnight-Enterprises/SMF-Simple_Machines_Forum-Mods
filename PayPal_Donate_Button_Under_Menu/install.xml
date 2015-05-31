@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!--Generated with Mod Manager (c) 2013 Yoshi2889-->
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BK-Modding:Donate</id>
+    <version>1.1</version>
+    <file name="$languagedir/Modifications.english-utf8.php" error="skip">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[
+$txt['donate_code'] = 'Please enter your PayPal Donate Button HTML code:';
+]]></add>
+        </operation>
+    </file>
+    <file name="$languagedir/Modifications.english.php">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[
+$txt['donate_code'] = 'Please enter your PayPal Donate Button HTML code:';
+]]></add>
+        </operation>
+    </file>
+    <file name="$sourcedir/ManageSettings.php">
+        <operation>
+            <search position="before"><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!
+]]></search>
+            <add><![CDATA[
+                array('large_text', 'donate_code', '4'),
+		'',
+]]></add>
+        </operation>
+    </file>
+    <file name="$themedir/index.template.php">
+        <operation>
+            <search position="replace"><![CDATA[	// Custom banners and shoutboxes should be placed here, before the linktree.]]></search>
+            <add><![CDATA[	// Custom banners and shoutboxes should be placed here, before the linktree.
+            if(!empty($modSettings['donate_code']))
+		echo '
+			<div id="donate">
+				', $modSettings['donate_code'], '
+			</div>';]]></add>
+        </operation>
+    </file>
+
+    <file name="$themedir/css/index.css">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[#donate
+            {
+            width: 90%;
+            text-align: center;
+            vertical-align:middle;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+            border: 0;
+            }]]></add>
+        </operation>
+    </file>
+
+</modification>

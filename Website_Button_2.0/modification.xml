@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    Modification file for Website Button
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>BurkeKnight:Website</id>
+
+	<version>2.0</version>
+
+	<file name="$sourcedir/Subs.php">
+		<operation>
+			<search position="after"><![CDATA[
+			'home' => array(
+				'title' => $txt['home'],
+				'href' => $scripturl,
+				'show' => true,
+				'sub_buttons' => array(
+				),
+				'is_last' => $context['right_to_left'],
+			),]]></search>
+			<add><![CDATA[
+			'website' => array(
+				'title' => !empty($modSettings['website_label']) ? $modSettings['website_label'] : $txt['website_label_default'],
+				'href' => (!empty($modSettings['website_execute_url']) ? $modSettings['website_execute_url'] : $scripturl) . '" target="_blank',
+				'show' => $modSettings['website_mod'],
+				'sub_buttons' => array(
+				),
+			),
+			'home' => array(
+				'title' => $txt['home'],
+				'href' => $scripturl,
+				'show' => true,
+				'sub_buttons' => array(
+				),
+				'is_last' => $context['right_to_left'],
+			),]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Admin.php">
+		<operation>
+			<search position="before"><![CDATA[
+						// Mod Authors for a "ADD AFTER" on this line. Ensure you end your change with a comma. For example:]]></search>
+			<add><![CDATA[
+						'website' => array($txt['website_mods_cat']),]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/ManageSettings.php">
+		<operation>
+			<search position="before"><![CDATA[
+		// Mod authors, once again, if you have a whole section to add do it AFTER this line, and keep a comma at the end.]]></search>
+			<add><![CDATA[
+		'website' => 'ModifyWebsiteSettings',]]></add>
+		</operation>
+		<operation>
+			<search position="end"></search>
+			<add><![CDATA[
+function ModifyWebsiteSettings($return_config = false)
+{
+	global $txt, $scripturl, $context, $settings, $sc;
+
+	$config_vars = array(
+
+		array('check', 'website_mod'),
+		array('text', 'website_label', '20'),
+		array('text', 'website_execute_url', '60'),
+	);
+
+	if ($return_config)
+		return $config_vars;
+
+	if (isset($_GET['save']))
+	{
+		checkSession();
+
+		saveDBSettings($config_vars);
+		writeLog();
+
+		redirectexit('action=admin;area=modsettings;sa=website');
+	}
+
+	$context['post_url'] = $scripturl . '?action=admin;area=modsettings;save;sa=website';
+	$context['settings_title'] = $txt['website_title'];
+
+	prepareDBSettingContext($config_vars);
+}
+]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[
+		// This line is to help mod authors do a search/add after if you want to add something here. Keyword: FOOT TAPPING SUCKS!]]></search>
+			<add><![CDATA[
+		if(empty($_POST['website_label']))
+		   $_POST['website_label'] = '';
+		   
+		if(empty($_POST['website_execute_url']))
+		   $_POST['website_execute_url'] = '';
+]]></add>
+	   </operation>
+	</file>
+
+	<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['website_mod'] = 'Activate Website Button:';
+$txt['website_execute_url'] = 'Website Button execute URL:';
+$txt['website_label'] = 'Website Button label:';
+$txt['website_label_default'] = 'Website';
+$txt['website_mods_cat'] = 'Website Button';
+$txt['website_title']='Website Button';
+]]></add>
+		</operation>
+	</file>
+
+	<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['website_mod'] = 'Activate Website Button:';
+$txt['website_execute_url'] = 'Website Button execute URL:';
+$txt['website_label'] = 'Website Button label:';
+$txt['website_label_default'] = 'Website';
+$txt['website_mods_cat'] = 'Website Button';
+$txt['website_title']='Website Button';
+]]></add>
+		</operation>
+	</file>
+
+</modification>

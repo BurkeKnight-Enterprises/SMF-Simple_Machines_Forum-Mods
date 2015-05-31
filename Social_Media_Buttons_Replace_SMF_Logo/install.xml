@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BurkeKnight:SMBRSMFL</id>
+    <version>1.0</version>
+    <file name="$languagedir/Modifications.english-utf8.php" error="skip">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[
+$txt['facebook'] = 'Facebook';
+$txt['flickr'] = 'Flickr';
+$txt['googleplus'] = 'Google+';
+$txt['instagram'] = 'Instagram';
+$txt['pinterest'] = 'Pinterest';
+$txt['stumbleupon'] = 'Stumbleupon';
+$txt['tumblr'] = 'Tumblr';
+$txt['twitter'] = 'Twitter';
+$txt['youtube'] = 'Youtube';
+$txt['rss'] = 'RSS';
+$txt['github'] = 'Github';
+$txt['steam'] = 'Steam';
+$txt['linkedin'] = 'Linkedin';
+
+$txt['facebook_id'] = 'Facebook';
+$txt['flickr_id'] = 'Flickr';
+$txt['googleplus_id'] = 'Google+';
+$txt['instagram_id'] = 'Instagram';
+$txt['pinterest_id'] = 'Pinterest';
+$txt['stumbleupon_id'] = 'Stumbleupon';
+$txt['tumblr_id'] = 'Tumblr';
+$txt['twitter_id'] = 'Twitter';
+$txt['youtube_id'] = 'Youtube';
+$txt['rss_id'] = 'Show RSS';
+$txt['github_id'] = 'Github';
+$txt['steam_id'] = 'Steam';
+$txt['linkedin_id'] = 'Linkedin';
+
+$txt['url_desc'] = 'Please enter complete url. Example, http://www.yourforumname.domain/something/';
+]]></add>
+        </operation>
+    </file>
+    <file name="$languagedir/Modifications.english.php">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[
+$txt['facebook'] = 'Facebook';
+$txt['flickr'] = 'Flickr';
+$txt['googleplus'] = 'Google+';
+$txt['instagram'] = 'Instagram';
+$txt['pinterest'] = 'Pinterest';
+$txt['stumbleupon'] = 'Stumbleupon';
+$txt['tumblr'] = 'Tumblr';
+$txt['twitter'] = 'Twitter';
+$txt['youtube'] = 'Youtube';
+$txt['rss'] = 'RSS';
+$txt['github'] = 'Github';
+$txt['steam'] = 'Steam';
+$txt['linkedin'] = 'Linkedin';
+
+$txt['facebook_id'] = 'Facebook';
+$txt['flickr_id'] = 'Flickr';
+$txt['googleplus_id'] = 'Google+';
+$txt['instagram_id'] = 'Instagram';
+$txt['pinterest_id'] = 'Pinterest';
+$txt['stumbleupon_id'] = 'Stumbleupon';
+$txt['tumblr_id'] = 'Tumblr';
+$txt['twitter_id'] = 'Twitter';
+$txt['youtube_id'] = 'Youtube';
+$txt['rss_id'] = 'Show RSS';
+$txt['github_id'] = 'Github';
+$txt['steam_id'] = 'Steam';
+$txt['linkedin_id'] = 'Linkedin';
+
+$txt['url_desc'] = 'Please enter complete url. Example, http://www.yourforumname.domain/something/';
+]]></add>
+        </operation>
+    </file>
+    <file name="$themedir/Settings.template.php">
+        <operation>
+            <search position="replace"><![CDATA[);
+}
+
+?>]]></search>
+            <add><![CDATA[
+            '',
+		array(
+			'id' => 'facebook_id',
+			'label' => $txt['facebook_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'flickr_id',
+			'label' => $txt['flickr_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'googleplus_id',
+			'label' => $txt['googleplus_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'github_id',
+			'label' => $txt['github_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'steam_id',
+			'label' => $txt['steam_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'linkedin_id',
+			'label' => $txt['linkedin_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'instagram_id',
+			'label' => $txt['instagram_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'pinterest_id',
+			'label' => $txt['pinterest_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'stumbleupon_id',
+			'label' => $txt['stumbleupon_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'tumblr_id',
+			'label' => $txt['tumblr_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'twitter_id',
+			'label' => $txt['twitter_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+		array(
+			'id' => 'youtube_id',
+			'label' => $txt['youtube_id'],
+			'description' => $txt['url_desc'],
+			'type' => 'text',
+		),
+	);
+}
+
+?>]]></add>
+        </operation>
+    </file>
+    <file name="$themedir/index.template.php">
+        <operation>
+            <search position="replace"><![CDATA[', empty($settings['site_slogan']) ? '<img id="smflogo" src="' . $settings['images_url'] . '/smflogo.png" alt="Simple Machines Forum" title="Simple Machines Forum" />' : '<div id="siteslogan" class="floatright">' . $settings['site_slogan'] . '</div>', ']]></search>
+            <add><![CDATA[<div class="floatright"><br />
+			<ul class="social-icons">';
+				if(!empty($settings['facebook_id']))
+					echo '
+						<li class="facebook"><a href="', $settings['facebook_id'] , '" target="_blank">', $txt['facebook'], '</a></li>';
+				if(!empty($settings['twitter_id']))
+					echo '
+						<li class="twitter"><a href="', $settings['twitter_id'] , '" target="_blank">', $txt['twitter'], '</a></li>';
+				if(!empty($settings['flickr_id']))
+					echo '
+						<li class="flickr"><a href="', $settings['flickr_id'] , '" target="_blank">', $txt['flickr'], '</a></li>';
+				if(!empty($settings['github_id']))
+					echo '
+						<li class="github"><a href="', $settings['github_id'] , '" target="_blank">', $txt['github'], '+</a></li>';
+				if(!empty($settings['steam_id']))
+					echo '
+						<li class="steam"><a href="', $settings['steam_id'] , '" target="_blank">', $txt['steam'], '+</a></li>';
+				if(!empty($settings['googleplus_id']))
+					echo '
+						<li class="googleplus"><a href="', $settings['googleplus_id'] , '" target="_blank">', $txt['googleplus'], '+</a></li>';
+				if(!empty($settings['instagram_id']))
+					echo '
+						<li class="instagram"><a href="', $settings['instagram_id'] , '" target="_blank">', $txt['instagram'], '</a></li>';
+				if(!empty($settings['pinterest_id']))
+					echo '
+						<li class="pinterest"><a href="', $settings['pinterest_id'] , '" target="_blank">', $txt['pinterest'], '</a></li>';
+				if(!empty($settings['stumbleupon_id']))
+					echo '
+						<li class="stumbleupon"><a href="', $settings['stumbleupon_id'] , '" target="_blank">', $txt['stumbleupon'], '</a></li>';
+				if(!empty($settings['tumblr_id']))
+					echo '
+						<li class="tumblr"><a href="', $settings['tumblr_id'] , '" target="_blank">', $txt['tumblr'], '</a></li>';
+				if(!empty($settings['youtube_id']))
+					echo '
+						<li class="youtube"><a href="', $settings['youtube_id'] , '" target="_blank">', $txt['youtube'], '</a></li>';
+				if(!empty($settings['linkedin_id']))
+					echo '
+						<li class="linkedin"><a href="', $settings['linkedin_id'] , '" target="_blank">', $txt['linkedin'], '+</a></li>';
+					echo '
+						<li class="rss"><a href="', $scripturl, '?action=.xml;type=rss" target="_blank">', $txt['rss'], '</a></li>';
+			echo '</ul>
+			</div>
+]]></add>
+        </operation>
+    </file>
+
+    <file name="$themedir/css/index.css">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[/* Social Media Buttons
+ * --------------------------------------- */
+.social-icons, .social-icons ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.social-icons li {
+	float: left;
+	width: auto;
+	padding: 0 5px 0 0;
+	margin: 0;
+}
+.social-icons li a {
+	display: block;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	-webkit-transition: all 0.25s linear;
+	-moz-transition: all 0.25s linear;
+	-o-transition: all 0.25s linear;
+	transition: all 0.25s linear;
+}
+.social-icons li a:hover {
+	background-position: 0 0!important;
+}
+.social-icons li.facebook a {
+	background: url(../images/social/facebook.png) no-repeat 0 -20px;
+	background-color: #3b5998;
+}
+.social-icons li.facebook a:hover {
+	background-color: #3b5998;
+}
+.social-icons li.flickr a {
+	background: url(../images/social/flickr.png) no-repeat 0 -20px;
+	background-color: #f1628b;
+}
+.social-icons li.flickr a:hover {
+	background-color: #f1628b;
+}
+.social-icons li.github a {
+	background: url(../images/social/GitHub.png) no-repeat 0 -20px;
+	background-color: #ffffff;
+}
+.social-icons li.github a:hover {
+	background-color: #ffffff;
+}
+.social-icons li.steam a {
+	background: url(../images/social/steam2.png) no-repeat 0 -20px;
+	background-color: #ffffff;
+}
+.social-icons li.steam a:hover {
+	background-color: #ffffff;
+}
+.social-icons li.linkedin a {
+	background: url(../images/social/linkedin_s.png) no-repeat 0 -20px;
+	background-color: #ffffff;
+}
+.social-icons li.linkedin a:hover {
+	background-color: #ffffff;
+}
+.social-icons li.googleplus a {
+	background: url(../images/social/google_plus.png) no-repeat 0 -20px;
+	background-color: #d94a39;
+}
+.social-icons li.googleplus a:hover {
+	background-color: #d94a39;
+}
+.social-icons li.instagram a {
+	background: url(../images/social/instagram.png) no-repeat 0 -20px;
+	background-color: #cd5959;
+}
+.social-icons li.instagram a:hover {
+	background-color: #cd5959;
+}
+.social-icons li.pinterest a {
+	background: url(../images/social/pinterest.png) no-repeat 0 -20px;
+	background-color: #cb2027;
+}
+.social-icons li.pinterest a:hover {
+	background-color: #cb2027;
+}
+.social-icons li.stumbleupon a {
+	background: url(../images/social/stumbleupon.png) no-repeat 0 -20px;
+	background-color: #c24335;
+}
+.social-icons li.stumbleupon a:hover {
+	background-color: #c24335;
+}
+.social-icons li.tumblr a {
+	background: url(../images/social/tumblr.png) no-repeat 0 -20px;
+	background-color: #3a5976;
+}
+.social-icons li.tumblr a:hover {
+	background-color: #3a5976;
+}
+.social-icons li.twitter a {
+	background: url(../images/social/twitter.png) no-repeat 0 -20px;
+	background-color: #48c4d2;
+}
+.social-icons li.twitter a:hover {
+	background-color: #48c4d2;
+}
+.social-icons li.youtube a {
+	background: url(../images/social/youtube.png) no-repeat 0 -20px;
+	background-color: #f45750;
+}
+.social-icons li.youtube a:hover {
+	background-color: #f45750;
+}
+.social-icons li.rss a {
+	background: url(../images/social/rss.png) no-repeat 0 -20px;
+	background-color: #f86811;
+}
+.social-icons li.rss a:hover {
+	background-color: #f86811;
+}
+]]></add>
+        </operation>
+    </file>
+
+</modification>

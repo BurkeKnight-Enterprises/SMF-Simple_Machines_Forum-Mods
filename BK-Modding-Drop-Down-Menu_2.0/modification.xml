@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Modification file for BK-Modding Drop Down Menu
+
+	ATTENTION: If you are trying to install this manually, you should try
+	the package manager.  If it will not work for you, please take a look
+	at the following for information on this format:
+		http://mods.simplemachines.org/docs/manual-install.php
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>BK-Modding:Drop_Down_Menu</id>
+
+	<version>2.0</version>
+
+	<file name="$themedir/style.css">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+/* DropDownMenu */
+
+div#menu {
+   left: 40px;
+   z-index: 11;
+   height: 22px;
+   background: url('images/sep_black.png') no-repeat 0 0;; padding-left:1px; padding-right:0px; padding-top:0px; padding-bottom:0px
+}
+
+div#menu ul {
+   margin: 0px;
+   padding: 0px;
+   list-style: none;
+   float: left; 
+}
+
+div#menu li {
+   position: relative;
+   margin: 0px;
+   padding: 0px;
+   display: block;
+   float: left;
+   z-index: 5; 
+   font-weight: bold;
+}
+
+div#menu li a, #menu li span.separator {
+   height: 22px;
+   display: block;
+   float: left;
+   line-height: 18px;
+   text-decoration: none;
+   color: #FFFFFF;
+}
+
+div#menu li span { 
+   display: block;
+}
+
+div#menu li span { 
+   background-repeat: no-repeat;
+   background-position: 95% 0px;
+}
+
+div#menu a:hover, div#menu span.separator:hover, div#menu span.sfhover { 
+   color: #D2D2D2;
+}
+
+div#menu li.active { 
+   font-weight: bold;
+}
+
+div#menu li.active ul { 
+   font-weight: normal;
+}
+
+div#menu li.parent span.separator { 
+   cursor: pointer;
+}
+
+ 
+div#menu ul.menu {
+   padding-right: 1px;
+   background: url(images/catbg.jpg) #88A6C0 repeat-x; /* Change your mainmenu background color/image here */
+}
+
+div#menu li.level1 {
+   background: url('images/sep_white.png') no-repeat 0 0;
+}
+
+div#menu a.level1, div#menu span.level1 {
+   background: url('images/sep_black.png') no-repeat 100% 0;
+   color: #FFFFFF; /*Change your menu link color in here*/
+   font-size: 80%; /*Change your menu font size in here*/
+      
+}
+
+div#menu a.level1 span, div#menu span.level1 span {
+   padding: 3px 6px 0px 6px;
+}
+
+div#menu li:hover a.level1, div#menu li.sfhover a.level1, div#menu li:hover span.level1, div#menu li.sfhover span.level1 { 
+   color: #CFD7DE;
+}
+
+div#menu li.active a.level1, div#menu li.active span.level1 { 
+   color: #aa1428;  /*Change your menu link hover color in here*/
+   font-weight: bold;
+}
+
+ 
+div#menu a.level1 span.title, div#menu span.level1 span.title{
+   padding: 0px;
+}
+
+ 
+div#menu a.level1 span.sub, div#menu span.level1 span.sub {
+   padding: 0px;
+   font-size: 60%;
+   font-weight: normal;
+   color: #969696;
+   margin-top: -6px;
+   line-height: 10px;
+}
+
+ 
+div#menu li:hover a.level1 span.sub, div#menu li:hover span.level1 span.sub, div#menu li.sfhover a.level1 span.sub, div#menu li.sfhover span.level1 span.sub {
+   color: #ffffff;
+}
+
+ 
+div#menu ul.menu ul {
+   position: absolute;
+   top: 22px;
+   left: -999em; 
+   width: 165px;
+        font-size: 88%;
+}
+
+div#menu li:hover ul, div#menu li.sfhover ul {
+   left: 0px; 
+   z-index: 100;
+}
+
+div#menu li.level1 li {
+      width: 100%; 
+   text-indent: 15px;
+}
+
+
+div#menu li.level1 li a, div#menu li.level1 li span.separator{
+   height: 25px;
+   padding: 0px;
+   margin: 0px 1px;;
+   background: #89A7C1; /*Change your submenu background color in here*/
+   float: none; 
+   display: block;
+   line-height: 25px
+}]]></add>
+		</operation>
+	</file>
+
+	<file name="$themedir/index.template.php">
+		<operation>
+			<search position="replace"><![CDATA[<div id="main_menu">
+		<ul class="clearfix">';
+
+	foreach ($context['menu_buttons'] as $act => $button)
+	{
+		echo '
+			<li id="button_', $act, '">
+				<a', $button['active_button'] ? ' class="active"' : '', ' title="', $act , '" href="', $button['href'], '">
+					<span', isset($button['is_last']) ? ' class="last"' : '', '>', ($button['active_button'] ? '<em>' : ''), $button['title'], ($button['active_button'] ? '</em>' : ''), '</span>
+				</a>
+			</li>';
+	}
+
+	echo '
+		</ul>
+	</div>';]]></search>
+			<add><![CDATA[<div id="menu">
+        <ul class="menu">';
+
+    //    Go through each of the main menu buttons.
+    foreach ($context['menu_buttons'] as $act => $button)
+    {
+        echo '
+            <li class="level1"><a href="', $button['href'], '" class="level1"><span><span class="title">' , $button['title'] , '</span></span></a>';
+          //    Does this button have any subbuttons?
+        if(!empty($button['sub_buttons']))
+        {
+            echo '
+            <ul class="level2">';
+            foreach($button['sub_buttons'] as $sub_button)
+                    echo '
+                <li class="level2"><a href="', $sub_button['href'], '" class="level2"><span>' , $sub_button['title'] , '</span></a></li>';
+            echo '
+            </ul>';
+        }
+        echo '
+            </li>';
+    }
+   
+    echo '
+        </ul>
+    </div>';]]></add>
+		</operation>
+	</file>
+
+</modification>

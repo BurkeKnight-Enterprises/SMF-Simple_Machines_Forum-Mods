@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BurkeKnight:HPMTiEN</id>
+    <version>1.0</version>
+    <file name="$languagedir/PersonalMessage.english.php">
+        <operation>
+            <search position="before"><![CDATA[$txt['pm_email'] = 'You have just been sent a personal message by SENDER on ' . $context['forum_name'] . '.' . "\n\n" . 'IMPORTANT: Remember, this is just a notification. Please do not reply to this email.' . "\n\n" . 'The message they sent you was:' . "\n\n" . 'MESSAGE';]]></search>
+            <add><![CDATA[$txt['pm_email_hpmtien'] = 'You have just been sent a personal message by SENDER on ' . $context['forum_name'] . '.' . "\n\n" . 'IMPORTANT: Remember, this is just a notification. Please do not reply to this email.' . "\n\n" . 'Instead, please visit the forum at ' . $GLOBALS['scripturl'] . '?action=pm to read your message.';]]></add>
+        </operation>
+    </file>
+
+    <file name="$sourcedir/Subs-Post.php">
+        <operation>
+            <search position="replace"><![CDATA[$mailmessage = str_replace(array('SUBJECT', 'MESSAGE', 'SENDER'), array($subject, $message, un_htmlspecialchars($from['name'])), $txt['pm_email']);]]></search>
+            <add><![CDATA[if (!empty($modSettings['hpmtien_mod']))
+		$mailmessage = str_replace(array('SUBJECT', 'MESSAGE', 'SENDER'), array($subject, $message, un_htmlspecialchars($from['name'])), $txt['pm_email_hpmtien']);
+	else
+		$mailmessage = str_replace(array('SUBJECT', 'MESSAGE', 'SENDER'), array($subject, $message, un_htmlspecialchars($from['name'])), $txt['pm_email']);
+]]></add>
+        </operation>
+    </file>
+
+		<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['hpmtien_mod'] = 'Hide PM Text in Email Notifications:<br /><strong>If checked, the text in a PM sent by email will be hidden.</strong>';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['hpmtien_mod'] = 'Hide PM Text in Email Notifications:<br /><strong>If checked, the text in a PM sent by email will be hidden.</strong>';
+]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/ManageSettings.php">
+		<operation>
+			<search position="before"><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!]]></search>
+			<add><![CDATA[
+			                array('check', 'hpmtien_mod'),
+		'',
+]]></add>
+		</operation>
+	</file>
+
+</modification>

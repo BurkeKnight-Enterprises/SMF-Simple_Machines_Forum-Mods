@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<!--Generated with Mod Manager (c) 2013 Yoshi2889-->
+<package-info xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/package-info">
+    <id>BK-Modding:Sub-Board</id>
+    <name>BK-Modding Sub-Board</name>
+    <version>2.0</version>
+    <type>modification</type>
+    <install for="1.1 - 1.1.99,2.0 - 2.99">
+        <readme parsebbc="true">readme.txt</readme>
+        <modification>install.xml</modification>
+    </install>
+    <uninstall for="1.1 - 1.1.99,2.0 - 2.99">
+        <modification reverse="true">install.xml</modification>
+    </uninstall>
+</package-info>

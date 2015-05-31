@@ -1,0 +1,146 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<name>Group Key Order and Style</name>
+	<id>BurkeKnight:Group_Key_Order</id>
+	<version>1.1</version>
+		<file name="$languagedir/Modifications.english.php"">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['arrange_groupkeyorder'] = '<strong>Membergroup legend display arrangement.</strong><br /><span class="smalltext">(Must be separated by comma. i.e. 1,2,8,7,6,5,4)<br />Remember to <a href="' . $scripturl . '?action=admin;area=maintain;sa=routine">Empty the file cache</a> after any changes.</span>';
+$txt['gkstyle_start'] = 'Opening HTML code to be used before group name:<br />Allowed HTML Tags: &lt;strong&gt;&lt;/strong&gt; &lt;em&gt;&lt;/em&gt; &lt;span&gt;&lt;/span&gt;';
+$txt['gkstyle_end'] = 'Closing HTML code to be used after group name:<br />Be sure to close the HTML tags in reversed order.';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['arrange_groupkeyorder'] = '<strong>Membergroup legend display arrangement.</strong><br /><span class="smalltext">(Must be separated by comma. i.e. 1,2,8,7,6,5,4)<br />Remember to <a href="' . $scripturl . '?action=admin;area=maintain;sa=routine">Empty the file cache</a> after any changes.</span>';
+$txt['gkstyle_start'] = 'Opening HTML code to be used before group name:<br />Allowed HTML Tags: &lt;strong&gt;&lt;/strong&gt; &lt;em&gt;&lt;/em&gt; &lt;span&gt;&lt;/span&gt;';
+$txt['gkstyle_end'] = 'Closing HTML code to be used after group name:<br />Be sure to close the HTML tags in reversed order.';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Help.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$helptxt['arrange_groupkeyorder'] = 'Arrange the display of your membergroups legend. Enter the group id number and must be separated by comma. No comma after the last number. (i.e. 1,2,8,7,6,5,4).';
+$helptxt['gkstyle_start'] = '<strong>Enter the opening HTML code you want to use for the group key.<br />You may use any HTML code to adjust the looks of the group key.<br />Allowed HTML Tags:<br />&lt;strong&gt;&lt;/strong&gt; &lt;em&gt;&lt;/em&gt; &lt;span&gt;&lt;/span&gt;<br />Be sure to close the HTML tags in reversed order.</strong>';
+$helptxt['gkstyle_end'] = '<strong>Enter the closing HTML code for the group key.<br />You may use any HTML code to adjust the looks of the group key.<br />Be sure to close the HTML tags in reversed order.</strong>';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Help.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$helptxt['arrange_groupkeyorder'] = 'Arrange the display of your membergroups legend. Enter the group id number and must be separated by comma. No comma after the last number. (i.e. 1,2,8,7,6,5,4).';
+$helptxt['gkstyle_start'] = '<strong>Enter the opening HTML code you want to use for the group key.<br />You may use any HTML code to adjust the looks of the group key.<br />Allowed HTML Tags:<br />&lt;strong&gt;&lt;/strong&gt; &lt;em&gt;&lt;/em&gt; &lt;span&gt;&lt;/span&gt;<br />Be sure to close the HTML tags in reversed order.</strong>';
+$helptxt['gkstyle_end'] = '<strong>Enter the closing HTML code for the group key.<br />You may use any HTML code to adjust the looks of the group key.<br />Be sure to close the HTML tags in reversed order.</strong>';
+]]></add>
+		</operation>
+	</file>
+
+
+	<file name="$sourcedir/ManageSettings.php">
+		<operation>
+			<search position="before"><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!]]></search>
+			<add><![CDATA[
+			array('text', 'arrange_groupkeyorder'),
+      array('text', 'gkstyle_start', '30'),
+		  array('text', 'gkstyle_end', '30'),
+
+		'',
+]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[// This line is to help mod authors do a search/add after if you want to add something here. Keyword: FOOT TAPPING SUCKS!]]></search>
+			<add><![CDATA[
+                $_POST['gkstyle_start'] = strip_tags($_POST['gkstyle_start'], '<span><strong><em>');
+		]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Subs-Membergroups.php">
+		<operation>
+			<search position="replace"><![CDATA[	global $scripturl, $smcFunc;
+
+	$request = $smcFunc['db_query']('', '
+		SELECT id_group, group_name, online_color
+		FROM {db_prefix}membergroups
+		WHERE min_posts = {int:min_posts}
+			AND hidden = {int:not_hidden}
+			AND id_group != {int:mod_group}
+			AND online_color != {string:blank_string}
+		ORDER BY group_name',
+		array(
+			'min_posts' => -1,
+			'not_hidden' => 0,
+			'mod_group' => 3,
+			'blank_string' => '',
+		)
+	);
+	$groupCache = array();
+	while ($row = $smcFunc['db_fetch_assoc']($request))
+		$groupCache[] = '<a href="' . $scripturl . '?action=groups;sa=members;group=' . $row['id_group'] . '" ' . ($row['online_color'] ? 'style="color: ' . $row['online_color'] . '"' : '') . '>' . $row['group_name'] . '</a>';
+	$smcFunc['db_free_result']($request);]]></search>
+			<add><![CDATA[	global $scripturl, $smcFunc, $modSettings;
+
+	$request = $smcFunc['db_query']('', '
+		SELECT id_group, group_name, online_color
+		FROM {db_prefix}membergroups
+		WHERE hidden = {int:not_hidden}
+			AND id_group != {int:mod_group}
+		ORDER BY group_name',
+		array(
+			'not_hidden' => 0,
+			'mod_group' => 3,
+		)
+	);
+	$groups = array();
+	$allowedTo = allowedTo('view_mlist'); // cheaper!
+	while ($row = $smcFunc['db_fetch_assoc']($request))
+	{
+		if ($allowedTo)
+			$groups[$row['id_group']] = '<a href="' . $scripturl . '?action=groups;sa=members;group=' . $row['id_group'] . '" ' . ($row['online_color'] ? 'style="color: ' . $row['online_color'] . '"' : '') . '>' . $row['group_name'] . '</a>';
+		else
+			$groups[$row['id_group']] = !empty($row['online_color']) ? '<span style="color: ' . $row['online_color'] . ';">'. $row['group_name'] . '</span>' : $row['group_name'];
+	}
+	$smcFunc['db_free_result']($request);
+
+	// Now rebuild it in the form expected for caching.
+	$groupCache = array();
+	if (!empty($modSettings['arrange_groupkeyorder']))
+	{
+		$group_order = explode(',', $modSettings['arrange_groupkeyorder']);
+		foreach ($group_order as $the_group)
+		{
+			$the_group = (int) trim($the_group);
+			if (isset($groups[$the_group]))
+				$groupCache[] = $groups[$the_group];
+		}
+	}
+	else
+		$groupCache = array_values($groups);]]></add>
+		</operation>
+	</file>		
+
+	<file name="$themedir/BoardIndex.template.php">
+		<operation>
+			<search position="replace"><![CDATA[if (!empty($settings['show_group_key']) && !empty($context['membergroups']))
+			echo '
+				<br />[' . implode(']&nbsp;&nbsp;[', $context['membergroups']) . ']';]]></search>
+			<add><![CDATA[if (!empty($context['membergroups']))
+			echo '</p><p class="last smalltext">
+							', (!empty($modSettings['gkstyle_start']) ? $modSettings['gkstyle_start'] : ''), '' . implode(',&nbsp;', $context['membergroups']) . '', (!empty($modSettings['gkstyle_end']) ? $modSettings['gkstyle_end'] : ''), '';]]></add>
+		</operation>
+	</file>
+
+</modification>

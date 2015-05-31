@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BurkeKnight:LongTLD</id>
+    <version>1.0</version>
+    <file name="$sourcedir/Post.php">
+        <operation>
+            <search position="replace"><![CDATA[					elseif (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_REQUEST['email']) == 0)]]></search>
+            <add><![CDATA[					elseif (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_REQUEST['email']) == 0)]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[				if (!allowedTo('moderate_forum') && preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_POST['email']) == 0)]]></search>
+            <add><![CDATA[				if (!allowedTo('moderate_forum') && preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_POST['email']) == 0)]]></add>
+        </operation>
+    </file>
+
+    <file name="$sourcedir/Profile-Modify.php">
+        <operation>
+            <search position="replace"><![CDATA[				if ($row['mask'] == 'email' && (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $value) === 0 || strlen($value) > 255))]]></search>
+            <add><![CDATA[				if ($row['mask'] == 'email' && (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $value) === 0 || strlen($value) > 255))]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[	if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $email) == 0)]]></search>
+            <add><![CDATA[	if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $email) == 0)]]></add>
+        </operation>
+    </file>
+
+    <file name="$sourcedir/Register.php">
+        <operation>
+            <search position="replace"><![CDATA[				if ($row['mask'] == 'email' && (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $value) === 0 || strlen($value) > 255))]]></search>
+            <add><![CDATA[				if ($row['mask'] == 'email' && (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $value) === 0 || strlen($value) > 255))]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[		if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_POST['new_email']) == 0)]]></search>
+            <add><![CDATA[		if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_POST['new_email']) == 0)]]></add>
+        </operation>
+    </file>
+
+    <file name="$sourcedir/SendTopic.php">
+        <operation>
+            <search position="replace"><![CDATA[	if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_POST['y_email']) == 0)]]></search>
+            <add><![CDATA[	if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_POST['y_email']) == 0)]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[	if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_POST['r_email']) == 0)]]></search>
+            <add><![CDATA[	if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_POST['r_email']) == 0)]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[			if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_POST['y_email']) == 0)]]></search>
+            <add><![CDATA[			if (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_POST['y_email']) == 0)]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[		elseif (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $_POST['email']) == 0)]]></search>
+            <add><![CDATA[		elseif (preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $_POST['email']) == 0)]]></add>
+        </operation>
+    </file>
+
+    <file name="$sourcedir/Subs-Members.php">
+        <operation>
+            <search position="replace"><![CDATA[	if (empty($regOptions['email']) || preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,6})$~', $regOptions['email']) === 0 || strlen($regOptions['email']) > 255)]]></search>
+            <add><![CDATA[	if (empty($regOptions['email']) || preg_match('~^[0-9A-Za-z=_+\-/][0-9A-Za-z=_\'+\-/\.]*@[\w\-]+(\.[\w\-]+)*(\.[\w]{2,16})$~', $regOptions['email']) === 0 || strlen($regOptions['email']) > 255)]]></add>
+        </operation>
+    </file>
+
+</modification>

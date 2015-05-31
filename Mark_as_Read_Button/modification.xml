@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	
+	<id>BurkeKnight:MRB</id>
+	<version>1.0</version>
+
+	<file name="$themedir/BoardIndex.template.php">
+		<operation>
+			<search position="replace"><![CDATA[// Show the mark all as read button?
+		if ($settings['show_mark_read'] && !empty($context['categories']))
+			echo '<div class="mark_read">', template_button_strip($mark_read_button, 'right'), '</div>';]]></search>
+			<add><![CDATA[// Show the mark all as read button?
+		if (!empty($modSettings['mrb_mod']) && $settings['show_mark_read'] && !empty($context['categories']))
+			echo '<div class="mark_read" align="right"><a href="' . $scripturl . '?action=markasread;sa=all;' . $context['session_var'] . '=' . $context['session_id']. '"><img src="' . $modSettings['mrb_mod'] . '" alt="' . $txt['mrb_text'] . '" title="' . $txt['mrb_text'] . '" /></a></div>';
+		elseif ($settings['show_mark_read'] && !empty($context['categories']))
+			echo '<div class="mrb_mod">', template_button_strip($mark_read_button, 'right'), '</div>';]]></add>
+		</operation>
+	</file>
+
+	<file name="$themedir/css/index.css">
+		<operation>
+			<search position="end" />
+			
+			<add><![CDATA[.mrb_mod img
+{
+	padding: 0 0.5em;
+	border: 0;
+}
+]]></add>
+		</operation>
+	</file>
+    
+    <file name="$sourcedir/ManageSettings.php">
+		<operation>
+			<search position="before"><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!]]></search>
+			<add><![CDATA[
+					array('text', 'mrb_mod', '30'),
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['mrb_mod'] = 'Enter URL for Mark as Read Button Image:';
+$txt['mrb_text'] = 'Mark ALL messages as read';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['mrb_mod'] = 'Enter URL for Mark as Read Button Image:';
+$txt['mrb_text'] = 'Mark ALL messages as read';
+]]></add>
+		</operation>
+	</file>
+
+</modification>

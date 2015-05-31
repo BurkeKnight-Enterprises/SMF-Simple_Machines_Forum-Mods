@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!--Generated with Mod Manager (c) 2013 Yoshi2889-->
+<modification xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/modification">
+    <id>BK-Modding:StatCounter</id>
+    <version>1.0</version>
+    <file name="$languagedir/Modifications.english-utf8.php" error="skip">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[
+$txt['statcounter_code'] = 'Please enter your StatCounter HTML code:<div class="smalltext">(Please <a href="http://www.statcounter.com/" target="_blank">Click Here</a> to set up your StatCounter account.)</div>';
+]]></add>
+        </operation>
+    </file>
+    <file name="$languagedir/Modifications.english.php">
+        <operation>
+            <search position="end" />
+            <add><![CDATA[
+$txt['statcounter_code'] = 'Please enter your StatCounter HTML code:<div class="smalltext">(Please <a href="http://www.statcounter.com/" target="_blank">Click Here</a> to set up your StatCounter account.)</div>';
+]]></add>
+        </operation>
+    </file>
+    <file name="$sourcedir/ManageSettings.php">
+        <operation>
+            <search position="replace"><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!]]></search>
+            <add><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!
+                array('large_text', 'statcounter_code', '4'),
+		'',
+]]></add>
+        </operation>
+    </file>
+    <file name="$themedir/index.template.php">
+        <operation>
+            <search position="replace"><![CDATA[	echo '
+</body>]]></search>
+            <add><![CDATA[if(!empty($modSettings['statcounter_code']))
+		echo '
+			<div align="center" style="width: 90%; margin-left: auto; margin-right: auto; margin-top:10px; border: 0px solid;" class="middletext">
+				', $modSettings['statcounter_code'], '
+			</div>';
+	echo '
+</body>]]></add>
+        </operation>
+    </file>
+</modification>

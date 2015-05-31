@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	
+	<id>BurkeKnight:Remove_Attachment_Info</id>
+	<version>1.0</version>
+
+	<file name="$themedir/Display.template.php">
+		<operation>
+			<search position="replace"><![CDATA[echo '
+										(', $attachment['size'], ($attachment['is_image'] ? ', ' . $attachment['real_width'] . 'x' . $attachment['real_height'] . ' - ' . $txt['attach_viewed'] : ' - ' . $txt['attach_downloaded']) . ' ' . $attachment['downloads'] . ' ' . $txt['attach_times'] . '.)]]></search>
+			    
+			<add><![CDATA[if(empty($modSettings['rai_mod']))
+			echo '
+										(', $attachment['size'], ($attachment['is_image'] ? ', ' . $attachment['real_width'] . 'x' . $attachment['real_height'] . ' - ' . $txt['attach_viewed'] : ' - ' . $txt['attach_downloaded']) . ' ' . $attachment['downloads'] . ' ' . $txt['attach_times'] . '.)]]></add>
+		</operation>
+	</file>
+    
+		<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['rai_mod'] = 'Remove Attachment Info:';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$txt['rai_mod'] = 'Remove Attachment Info:';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Help.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$helptxt['rai_mod'] = '<strong>If checked, the Attachment Info under the attachment in posts will be removed.</strong>';
+]]></add>
+		</operation>
+	</file>
+
+		<file name="$languagedir/Help.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+$helptxt['rai_mod'] = '<strong>If checked, the Attachment Info under the attachment in posts will be removed.</strong>';
+]]></add>
+		</operation>
+	</file>
+
+
+	<file name="$sourcedir/ManageSettings.php">
+		<operation>
+			<search position="before"><![CDATA[// Mod authors, add any settings UNDER this line. Include a comma at the end of the line and don't remove this statement!!]]></search>
+			<add><![CDATA[
+			                array('check', 'rai_mod'),
+		'',
+]]></add>
+		</operation>
+	</file>
+
+</modification>

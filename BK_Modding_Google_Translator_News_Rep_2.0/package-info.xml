@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Package manifest file for BK-Modding Google Translation - News Replacement
+
+	ATTENTION: If you are trying to install this manually, you should try
+	the package manager.  If it will not work for you, please take a look
+	at the following for information on this format:
+		http://mods.simplemachines.org/docs/manual-install.php
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>BK-Modding:Google_Translation</id>
+
+	<name>BK-Modding Google Translation - News Replacement</name>
+
+	<version>2.0</version>
+
+	<type>modification</type>
+
+	<install for="2.0 - 2.99">
+		<readme parsebbc="true">readme.txt</readme>
+		<modification>modification.xml</modification>
+		<require-file name="arabflag.png" destination="$imagesdir" />
+		<require-file name="chinaflag.png" destination="$imagesdir" />
+		<require-file name="franceflag.png" destination="$imagesdir" />
+		<require-file name="germanflag.png" destination="$imagesdir" />
+		<require-file name="greeceflag.png" destination="$imagesdir" />
+		<require-file name="italyflag.png" destination="$imagesdir" />
+		<require-file name="japanflag.png" destination="$imagesdir" />
+		<require-file name="koreaflag.png" destination="$imagesdir" />
+		<require-file name="netherlandsflag.png" destination="$imagesdir" />
+		<require-file name="portugalflag.png" destination="$imagesdir" />
+		<require-file name="russiaflag.png" destination="$imagesdir" />
+		<require-file name="spainflag.png" destination="$imagesdir" />
+	</install>
+
+	<uninstall for="2.0 - 2.99">
+		<modification reverse="true">modification.xml</modification>
+    <remove-file name="$imagesdir/arabflag.png" />
+    <remove-file name="$imagesdir/chinaflag.png" />
+    <remove-file name="$imagesdir/franceflag.png" />
+    <remove-file name="$imagesdir/germanflag.png" />
+    <remove-file name="$imagesdir/greeceflag.png" />
+    <remove-file name="$imagesdir/italyflag.png" />
+    <remove-file name="$imagesdir/japanflag.png" />
+    <remove-file name="$imagesdir/koreaflag.png" />
+    <remove-file name="$imagesdir/netherlandsflag.png" />
+    <remove-file name="$imagesdir/portugalflag.png" />
+    <remove-file name="$imagesdir/russiaflag.png" />
+    <remove-file name="$imagesdir/spainflag.png" />
+	</uninstall>
+
+</package-info>

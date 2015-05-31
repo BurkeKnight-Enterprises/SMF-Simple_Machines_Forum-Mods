@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Modification file for Add Buddy Button On Post
+
+	ATTENTION: If you are trying to install this manually, you should try
+	the package manager.  If it will not work for you, please take a look
+	at the following for information on this format:
+		http://mods.simplemachines.org/docs/manual-install.php
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+
+	<id>BurkeKnight:ABBOP</id>
+
+	<version>2.0</version>
+
+	<file name="$themedir/Display.template.php">
+		<operation>
+			<search position="replace"><![CDATA[		// Show a link to the member's profile.
+		echo '
+								', $message['member']['link'], '
+							</h4>
+							<ul class="reset smalltext" id="msg_', $message['id'], '_extra_info">';
+]]></search>
+			<add><![CDATA[		// Show a link to the member's profile.
+		echo '
+								', $message['member']['link'], '
+							</h4>
+							<ul class="reset smalltext" id="msg_', $message['id'], '_extra_info">';
+
+		// Can they add this member as a buddy?
+		if($context['user']['is_logged'] &&  !$message['member']['is_guest'] && $message['member']['id'] != $context['user']['id']) 
+                {
+			echo '
+								<li class="smalltext">
+									<span id="userstatus">
+										<a href="', $scripturl, '?action=buddy;u=', $message['member']['id'], ';topic=', $context['current_topic'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">[', $txt['buddy_' . ($message['member']['is_buddy'] ? 'remove' : 'add')], ']</a>
+									</span>
+								</li>'; }
+
+]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Subs-Members.php">
+		<operation>
+			<search position="replace"><![CDATA[	// Update the settings.
+	updateMemberData($user_info['id'], array('buddy_list' => implode(',', $user_info['buddies'])));
+
+	// Redirect back to the profile
+	redirectexit('action=profile;u=' . $_REQUEST['u']);]]></search>
+			<add><![CDATA[	// Update the settings.
+	updateMemberData($user_info['id'], array('buddy_list' => implode(',', $user_info['buddies'])));
+
+	// Redirect back to the profile
+	if (isset($_GET['topic']))
+		redirectexit('topic=' . $_GET['topic'] . ';msg' . $_GET['msg'] . '#msg' . $_GET['msg']);
+	else
+		redirectexit('action=profile;u=' . $_REQUEST['u']);]]></add>
+		</operation>
+	</file>
+
+	<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+//Add Buddy Button On Post Mod 
+$txt['buddy_add'] = 'Add Buddy';
+$txt['buddy_remove'] = 'Remove Buddy';
+//Add Buddy Button On Post Mod 
+]]></add>
+		</operation>
+	</file>
+
+	<file name="$languagedir/Modifications.english-utf8.php" error="skip">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[
+//Add Buddy Button On Post Mod 
+$txt['buddy_add'] = 'Add Buddy';
+$txt['buddy_remove'] = 'Remove Buddy';
+//Add Buddy Button On Post Mod 
+]]></add>
+		</operation>
+	</file>
+
+
+</modification>
